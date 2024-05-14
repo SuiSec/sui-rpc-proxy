@@ -21,7 +21,8 @@ export const parseHttpRequest = (
       uint8Array[i] = binaryString.charCodeAt(i);
     }
     const txb = TransactionBlock.from(uint8Array);
-    // const txb_data = txb.blockData;
+    const txb_data = txb.blockData;
+    console.log(txb_data);
     // const inputs = txb_data["inputs"];
     // const txs = txb_data["transactions"];
     // const sender = txb_data.sender;
