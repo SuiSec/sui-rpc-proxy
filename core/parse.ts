@@ -1,4 +1,4 @@
-import { TransactionBlock } from "@mysten/sui.js/transactions";
+import { Transaction } from "@mysten/sui/transactions";
 
 export interface IRequestBody {
   jsonrpc: string;
@@ -12,7 +12,7 @@ const delveMethods = [
 ];
 export const parseHttpRequest = (
   body: IRequestBody
-): TransactionBlock | undefined => {
+): Transaction | undefined => {
   if (delveMethods.includes(body.method)) {
     const params = body.params[0];
     const binaryString = atob(params);
@@ -20,12 +20,12 @@ export const parseHttpRequest = (
     for (let i = 0; i < binaryString.length; i++) {
       uint8Array[i] = binaryString.charCodeAt(i);
     }
-    const txb = TransactionBlock.from(uint8Array);
-    const txb_data = txb.blockData;
-    console.log(txb_data);
-    // const inputs = txb_data["inputs"];
-    // const txs = txb_data["transactions"];
-    // const sender = txb_data.sender;
-    return txb;
+    const tx = Transaction.from(uint8Array);
+    const tx_data = tx.getData();
+    console.log(tx_data);
+    // const inputs = tx_data["inputs"];
+    // const txs = tx_data["transactions"];
+    // const sender = tx_data.sender;
+    return tx;
   }
 };
